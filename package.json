@@ -11,12 +11,14 @@
     "antd": "^4.16.10",
     "axios": "0.24.0",
     "dayjs": "^1.10.6",
+    "lodash": "^4.17.21",
     "rc-tween-one": "^2.7.3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.0.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

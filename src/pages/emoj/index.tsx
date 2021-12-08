@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Form, Button, Table, Card, Input } from 'antd';
-import { getEmojList, Emoj } from '@services/emoj';
+import React, { useEffect, useState } from 'react';
+import { Form, Button, Table, Card, Input, Modal, FormInstance, message } from 'antd';
+import { getEmojList, Emoj, updateEmoj } from '@services/emoj';
+import ModalCreateEmoj from './component/modalCreateEmoj';
 import { PageInfo } from '@utils/types';
 
 function EmojPage() {
@@ -21,13 +22,42 @@ function EmojPage() {
     }
   };
 
+  const refresh = async () => {
+    await fetchList(1, 10);
+  };
+
   useEffect(() => {
     fetchList(1, 10);
   }, []);
 
-  const handleCreateEmoj = () => {};
+  const handleSearch = () => {
+    fetchList(1, 10);
+  };
+
+  const handleCreateEmoj = (record?: Emoj) => {
+    const { id } = record || {};
+    const label = id ? '新增表情' : '编辑表情';
+    const form = React.createRef<FormInstance>();
+    Modal.confirm({
+      title: label,
+      width: 600,
+      content: <ModalCreateEmoj modalCreateEmojRef={form} />,
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        const { name, desc, url } = await form.current?.validateFields();
+        await updateEmoj({ name, desc, url, id });
+        await refresh();
+        message.success(`${label}成功`);
+      },
+    });
+  };
 
   const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+    },
     {
       title: '名称',
       dataIndex: 'name',
@@ -37,11 +67,21 @@ function EmojPage() {
       dataIndex: 'desc',
     },
     {
+      title: '分组',
+      dataIndex: 'emoj_group_name',
+    },
+    {
+      title: '预览',
+      dataIndex: 'url',
+    },
+    {
       title: '操作',
       render: (text: any, record: Emoj) => {
         return (
           <>
-            <Button>删除</Button>
+            <Button type="link" danger>
+              删除
+            </Button>
           </>
         );
       },
@@ -56,7 +96,11 @@ function EmojPage() {
             <Input placeholder="请输入名称" />
           </Form.Item>
           <Form.Item>
+            <Button type="primary" onClick={handleSearch}>
+              搜索
+            </Button>
             <Button
+              style={{ marginLeft: '20px' }}
               type="primary"
               onClick={() => {
                 handleCreateEmoj();

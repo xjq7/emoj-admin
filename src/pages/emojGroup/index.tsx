@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Table, Card, Input, Modal, FormInstance, message } from 'antd';
-import { getEmojGroupList, Emoj, GetEmojListBody, updateEmojGroup, EmojGroupBody } from '@services/emoj';
+import { getEmojGroupList, Emoj, GetEmojListBody, updateEmojGroup, EmojGroup, deleteEmojGroup } from '@services/emoj';
 import { PageInfo } from '@utils/types';
 import ModalCreateEmojGroup from './modalCreateEmojGroup';
 
@@ -35,7 +35,7 @@ function EmojGroupPage() {
     fetchList(pageInfo.page, pageInfo.pageSize);
   };
 
-  const handleCreateEmojGroup = ({ isEdit, record }: { isEdit: boolean; record?: EmojGroupBody }) => {
+  const handleCreateEmojGroup = ({ isEdit, record }: { isEdit: boolean; record?: EmojGroup }) => {
     const { id } = record || {};
     const label = isEdit ? '编辑' : '新增';
 
@@ -48,11 +48,24 @@ function EmojGroupPage() {
       okText: '确定',
       cancelText: '取消',
       onOk: async () => {
-        const values: EmojGroupBody = await form.current?.validateFields();
+        const values: EmojGroup = await form.current?.validateFields();
         if (id) values.id = id;
         await updateEmojGroup(values);
         message.success(`${label}成功`);
         await refresh();
+      },
+    });
+  };
+
+  const handleDeleteEmojGroup = async ({ id }: EmojGroup) => {
+    Modal.confirm({
+      title: '确认删除?',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        await deleteEmojGroup({ id });
+        await refresh();
+        message.success('删除成功');
       },
     });
   };
@@ -75,7 +88,13 @@ function EmojGroupPage() {
       render: (text: any, record: Emoj) => {
         return (
           <>
-            <Button type="link" danger>
+            <Button
+              type="link"
+              danger
+              onClick={() => {
+                handleDeleteEmojGroup(record);
+              }}
+            >
               删除
             </Button>
           </>

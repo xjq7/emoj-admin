@@ -15,30 +15,29 @@ export function getEmojList(body: GetEmojBody): Promise<ResponseList<Emoj>> {
   return request.post('/emoj/list', body);
 }
 
-interface EmojGroup {
+export function updateEmoj(body: Emoj): Promise<Response> {
+  return request.post('/emoj/update', body);
+}
+
+export interface EmojGroup {
   id?: number;
   name?: string;
   desc?: string;
   created_at?: string;
 }
 
-export interface GetEmojListBody extends PageInfo {}
+export interface GetEmojListBody extends PageInfo {
+  name?: string;
+}
 
 export function getEmojGroupList(body: GetEmojListBody): Promise<ResponseList<EmojGroup>> {
   return request.post('/emoj/group/list', body);
 }
 
-export function updateEmoj(body: Emoj): Promise<Response> {
-  return request.post('/emoj/update', body);
-}
-
-export interface EmojGroupBody {
-  id?: number;
-  name?: string;
-  desc?: string;
-  created_at?: string;
-}
-
-export function updateEmojGroup(body: EmojGroupBody): Promise<Response> {
+export function updateEmojGroup(body: EmojGroup): Promise<Response> {
   return request.post('/emoj/group/update', body);
+}
+
+export function deleteEmojGroup(body: EmojGroup): Promise<Response> {
+  return request.post('/emoj/group/delete', body);
 }
