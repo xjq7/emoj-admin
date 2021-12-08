@@ -69,6 +69,7 @@ function EmojPage() {
       </Card>
       <Card>
         <Table
+          rowKey="id"
           loading={loading}
           dataSource={list}
           columns={columns}

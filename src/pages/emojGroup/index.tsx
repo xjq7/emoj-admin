@@ -96,6 +96,7 @@ function EmojGroupPage() {
               搜索
             </Button>
             <Button
+              style={{ marginLeft: '20px' }}
               type="primary"
               onClick={() => {
                 handleCreateEmojGroup({ isEdit: false });
@@ -108,6 +109,7 @@ function EmojGroupPage() {
       </Card>
       <Card>
         <Table
+          rowKey="id"
           loading={loading}
           dataSource={list}
           columns={columns}

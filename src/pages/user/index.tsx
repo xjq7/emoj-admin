@@ -159,6 +159,7 @@ function User() {
       </Card>
       <Card style={{ marginTop: '20px' }}>
         <Table
+          rowKey="id"
           loading={loading}
           dataSource={data}
           columns={columns}

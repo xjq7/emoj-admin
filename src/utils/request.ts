@@ -2,8 +2,11 @@ import Axios from 'axios';
 import { message } from 'antd';
 import config from '../config/env';
 
+const { VITE_API: API } = import.meta.env;
+console.log(import.meta.env);
+
 const instance = Axios.create({
-  baseURL: config.api,
+  baseURL: API as string,
   timeout: 5000,
 });
 
