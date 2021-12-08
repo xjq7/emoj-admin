@@ -1,0 +1,85 @@
+.dashboard-container {
+  .cards {
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  .banner-box {
+    margin-bottom: 20px;
+
+    .ant-card-body {
+      padding: 0;
+    }
+
+    .banner-content {
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .heat-map-box {
+        width: '100%';
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .rule-rank-data-box {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    .bar-container {
+      width: 500px;
+    }
+  }
+}
+
+.dashboard-content-box {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+
+  .divider {
+    width: 20px;
+  }
+
+  .dashboard-card {
+    flex: 1;
+  }
+}
+
+.charts-area {
+  height: 500px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+  .divider {
+    width: 20px;
+  }
+
+  #container, #map {
+    height: 100%;
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+  }
+}
+
+.ant-form-item-label {
+  width: 80px;
+  text-align: left;
+}
+
+.flex-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .cards {
+    flex: 1;
+  }
+}

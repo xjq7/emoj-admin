@@ -1,0 +1,42 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .login-content-box {
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .big-title {
+      font-size: 48px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .ant-form-item-required {
+      color: #fff;
+    }
+
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .submit-btn-wrapper {
+      .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: center;
+
+        .login-form-button {
+          width: 100px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+}
