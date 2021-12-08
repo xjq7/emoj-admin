@@ -1,32 +1,48 @@
-import Axios, { AxiosRequestConfig, Method } from 'axios'
-import {validateLogin} from '.'
+import Axios from 'axios';
+import { message } from 'antd';
+import config from '../config/env';
 
-const Request = (options: AxiosRequestConfig) => {
-  const {
-    url,
-    method,
-    data
-  } = options
-  return new Promise((resolve, reject)=>{
+const instance = Axios.create({
+  baseURL: config.api,
+  timeout: 5000,
+});
 
-    // 发起请求之前校验登录
-    validateLogin()
-    
-    Axios.request({
-      url,
-      method,
-      headers: {
-        'Content-type': 'application/json'
-      },
-      data
-    }).then((res)=>{
-      if ( res.status === 200 && res.data ) {
-        resolve(res.data)
-        return
-      }
-      reject(res)
-    })
-  })
-}
+instance.interceptors.request.use(
+  (config: any) => {
+    const token = localStorage.getItem('token');
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  },
+);
 
-export default Request
+instance.interceptors.response.use(
+  (response) => {
+    const { status, data } = response;
+    if (data.code !== 0) {
+      message.error(data.message);
+      return Promise.reject(data);
+    }
+
+    if (status !== 200) {
+      message.error('请求出错');
+      return Promise.reject(data);
+    }
+    return data;
+  },
+  (err) => {
+    const { status } = err.response;
+    message.error(err.message);
+    if (status === 401) {
+      message.error('登录已过期，请重新登录');
+      setTimeout(() => {
+        location.replace('/login');
+      }, 1000);
+    }
+    return Promise.reject(err);
+  },
+);
+
+export default instance;
