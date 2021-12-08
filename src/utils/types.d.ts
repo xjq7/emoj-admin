@@ -1,5 +1,5 @@
 export interface AnyOptions {
-  [key: string]: ANY;
+  [key: string]: any;
 }
 
 export interface Response<T = AnyOptions> {
