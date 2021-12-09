@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Table, Card, Input, Modal, FormInstance, message } from 'antd';
+import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Image } from 'antd';
 import { getEmojList, Emoj, updateEmoj } from '@services/emoj';
 import { PageInfo } from '@utils/types';
 import ModalCreateEmoj from './component/modalCreateEmoj';
@@ -80,6 +80,7 @@ const EmojPage = function () {
     {
       title: '预览',
       dataIndex: 'url',
+      render: (text: string) => <Image width={100} src={text} />,
     },
     {
       title: '操作',

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Table, Card, Input, Modal, FormInstance, message } from 'antd';
+import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Popconfirm } from 'antd';
 import { getEmojGroupList, Emoj, GetEmojListBody, updateEmojGroup, EmojGroup, deleteEmojGroup } from '@services/emoj';
 import { PageInfo } from '@utils/types';
 import ModalCreateEmojGroup from './modalCreateEmojGroup';
@@ -58,16 +58,9 @@ const EmojGroupPage = function () {
   };
 
   const handleDeleteEmojGroup = async ({ id }: EmojGroup) => {
-    Modal.confirm({
-      title: '确认删除?',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        await deleteEmojGroup({ id });
-        await refresh();
-        message.success('删除成功');
-      },
-    });
+    await deleteEmojGroup({ id });
+    await refresh();
+    message.success('删除成功');
   };
 
   const columns = [
@@ -86,15 +79,19 @@ const EmojGroupPage = function () {
     {
       title: '操作',
       render: (text: any, record: Emoj) => (
-        <Button
-          type="link"
-          danger
-          onClick={() => {
+        <Popconfirm
+          title="确认删除?"
+          onConfirm={() => {
             handleDeleteEmojGroup(record);
           }}
+          onCancel={() => {}}
+          okText="确认"
+          cancelText="取消"
         >
-          删除
-        </Button>
+          <Button type="link" danger>
+            删除
+          </Button>
+        </Popconfirm>
       ),
     },
   ];
