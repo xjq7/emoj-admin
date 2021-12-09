@@ -2,13 +2,13 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '@pages/login';
 import Layout from '@components/layout';
 
-function Router() {
+const Router = function () {
   return (
     <Routes>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/*" element={<Layout />}></Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={<Layout />} />
     </Routes>
   );
-}
+};
 
 export default Router;

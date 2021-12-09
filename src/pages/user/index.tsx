@@ -1,9 +1,9 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { Form, Input, Button, Table, Card, Modal, FormInstance, message } from 'antd';
 import dayjs from 'dayjs';
-import ModalCreateUser from './component/modalCreateUser';
 import { GetUserListBody, getUserList, updateUser, deleteUser } from '@services/user';
+import ModalCreateUser from './component/modalCreateUser';
 import { PageInfo } from '@/utils/types';
 
 export interface UserInfo {
@@ -13,7 +13,7 @@ export interface UserInfo {
   password?: string;
 }
 
-function User() {
+const User = function () {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageInfo, setPageInfo] = useState<PageInfo>({ page: 1, pageSize: 10, total: 0 });
@@ -21,7 +21,7 @@ function User() {
   const searchForm = React.createRef<FormInstance>();
 
   const fetchList = async (page?: number, pageSize?: number) => {
-    const { phone } = await searchForm.current?.validateFields();
+    const { phone } = (await searchForm.current?.validateFields()) || {};
     const params: GetUserListBody = {
       page: page || pageInfo.page,
       pageSize: pageSize || pageInfo.pageSize,
@@ -56,7 +56,7 @@ function User() {
     Modal.confirm({
       title: label,
       width: 600,
-      content: <ModalCreateUser isEdit={isEdit} data={data} modalCreateUserRef={modalCreateUserRef} />,
+      content: <ModalCreateUser data={data} modalCreateUserRef={modalCreateUserRef} />,
       okText: '确定',
       onOk: async () => {
         if (!modalCreateUserRef.current) return;
@@ -97,29 +97,27 @@ function User() {
       dataIndex: 'operation',
       align: 'center' as AlignType,
       title: '操作',
-      render: (_: any, record: any) => {
-        return (
-          <>
-            <Button
-              type="link"
-              onClick={() => {
-                handleUpdateUser({ isEdit: true, data: record });
-              }}
-            >
-              编辑
-            </Button>
-            <Button
-              type="link"
-              danger
-              onClick={() => {
-                handleDeleteUser(record.id);
-              }}
-            >
-              删除
-            </Button>
-          </>
-        );
-      },
+      render: (_: any, record: any) => (
+        <>
+          <Button
+            type="link"
+            onClick={() => {
+              handleUpdateUser({ isEdit: true, data: record });
+            }}
+          >
+            编辑
+          </Button>
+          <Button
+            type="link"
+            danger
+            onClick={() => {
+              handleDeleteUser(record.id);
+            }}
+          >
+            删除
+          </Button>
+        </>
+      ),
     },
   ];
 
@@ -178,6 +176,6 @@ function User() {
       </Card>
     </div>
   );
-}
+};
 
 export default User;

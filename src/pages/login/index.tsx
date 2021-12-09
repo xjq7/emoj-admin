@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Form, Input, Button, message, Row, Col } from 'antd';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import * as service from '@services/auth';
 import styles from './index.module.less';
 
-function Login() {
+const Login = function () {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -53,5 +53,5 @@ function Login() {
       </Row>
     </div>
   );
-}
+};
 export default Login;

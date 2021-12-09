@@ -4,7 +4,7 @@ import Dashboard from '@pages/dashboard';
 import Emoj from '@pages/emoj';
 import EmojGroup from '@pages/emojGroup';
 
-function Router() {
+const Router = function () {
   return (
     <Routes>
       <Route path="" element={<Dashboard />} />
@@ -13,6 +13,6 @@ function Router() {
       <Route path="emojGroup" element={<EmojGroup />} />
     </Routes>
   );
-}
+};
 
 export default Router;

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Router from './router';
 
-function App() {
+const App = function () {
   useEffect(() => {
     console.log('App');
   }, []);
@@ -10,6 +10,6 @@ function App() {
       <Router />
     </div>
   );
-}
+};
 
 export default App;

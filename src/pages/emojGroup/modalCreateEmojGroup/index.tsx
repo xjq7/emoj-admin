@@ -5,7 +5,7 @@ interface ModalCreateEmojGroupProps {
   modalCreateEmojGroupRef: React.RefObject<FormInstance>;
 }
 
-function ModalCreateEmojGroup(props: ModalCreateEmojGroupProps) {
+const ModalCreateEmojGroup = function (props: ModalCreateEmojGroupProps) {
   const { modalCreateEmojGroupRef } = props;
   return (
     <Form ref={modalCreateEmojGroupRef} labelCol={{ span: 6 }}>
@@ -17,6 +17,6 @@ function ModalCreateEmojGroup(props: ModalCreateEmojGroupProps) {
       </Form.Item>
     </Form>
   );
-}
+};
 
 export default ModalCreateEmojGroup;

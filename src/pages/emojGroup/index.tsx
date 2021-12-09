@@ -4,7 +4,7 @@ import { getEmojGroupList, Emoj, GetEmojListBody, updateEmojGroup, EmojGroup, de
 import { PageInfo } from '@utils/types';
 import ModalCreateEmojGroup from './modalCreateEmojGroup';
 
-function EmojGroupPage() {
+const EmojGroupPage = function () {
   const [list, setList] = useState<Emoj[]>([]);
   const [loading, setLoading] = useState(false);
   const [pageInfo, setPageInfo] = useState<PageInfo>({ page: 1, pageSize: 10, total: 0 });
@@ -12,7 +12,7 @@ function EmojGroupPage() {
   const fetchList = async (page?: number, pageSize?: number) => {
     try {
       setLoading(true);
-      const body: GetEmojListBody = { page: page, pageSize };
+      const body: GetEmojListBody = { page, pageSize };
       const { data } = await getEmojGroupList(body);
       const { list: emjoList = [], ...pageInfo } = data || {};
       setList(emjoList);
@@ -85,21 +85,17 @@ function EmojGroupPage() {
     },
     {
       title: '操作',
-      render: (text: any, record: Emoj) => {
-        return (
-          <>
-            <Button
-              type="link"
-              danger
-              onClick={() => {
-                handleDeleteEmojGroup(record);
-              }}
-            >
-              删除
-            </Button>
-          </>
-        );
-      },
+      render: (text: any, record: Emoj) => (
+        <Button
+          type="link"
+          danger
+          onClick={() => {
+            handleDeleteEmojGroup(record);
+          }}
+        >
+          删除
+        </Button>
+      ),
     },
   ];
 
@@ -147,6 +143,6 @@ function EmojGroupPage() {
       </Card>
     </>
   );
-}
+};
 
 export default EmojGroupPage;

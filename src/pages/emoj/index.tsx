@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Table, Card, Input, Modal, FormInstance, message } from 'antd';
 import { getEmojList, Emoj, updateEmoj } from '@services/emoj';
-import ModalCreateEmoj from './component/modalCreateEmoj';
 import { PageInfo } from '@utils/types';
+import ModalCreateEmoj from './component/modalCreateEmoj';
 
-function EmojPage() {
+const EmojPage = function () {
   const [list, setList] = useState<Emoj[]>([]);
   const [loading, setLoading] = useState(false);
   const [pageInfo, setPageInfo] = useState<PageInfo>({ page: 1, pageSize: 10, total: 0 });
@@ -45,8 +45,13 @@ function EmojPage() {
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
-        const { name, desc, url } = await form.current?.validateFields();
-        await updateEmoj({ name, desc, url, id });
+        const { name, desc, url } = (await form.current?.validateFields()) || {};
+        await updateEmoj({
+          name,
+          desc,
+          url,
+          id,
+        });
         await refresh();
         message.success(`${label}成功`);
       },
@@ -78,23 +83,21 @@ function EmojPage() {
     },
     {
       title: '操作',
-      render: (text: any, record: Emoj) => {
-        return (
-          <>
-            <Button
-              type="link"
-              onClick={() => {
-                handleUpdateEmoj(record);
-              }}
-            >
-              编辑
-            </Button>
-            <Button type="link" danger>
-              删除
-            </Button>
-          </>
-        );
-      },
+      render: (text: any, record: Emoj) => (
+        <>
+          <Button
+            type="link"
+            onClick={() => {
+              handleUpdateEmoj(record);
+            }}
+          >
+            编辑
+          </Button>
+          <Button type="link" danger>
+            删除
+          </Button>
+        </>
+      ),
     },
   ];
 
@@ -142,6 +145,6 @@ function EmojPage() {
       </Card>
     </>
   );
-}
+};
 
 export default EmojPage;

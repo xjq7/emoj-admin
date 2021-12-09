@@ -1,9 +1,7 @@
 import Axios from 'axios';
 import { message } from 'antd';
-import config from '../config/env';
 
 const { VITE_API: API } = import.meta.env;
-console.log(import.meta.env);
 
 const instance = Axios.create({
   baseURL: API as string,
@@ -12,13 +10,12 @@ const instance = Axios.create({
 
 instance.interceptors.request.use(
   (config: any) => {
+    const newConfig = { ...config };
     const token = localStorage.getItem('token');
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+    newConfig.headers.Authorization = `Bearer ${token}`;
+    return newConfig;
   },
-  (err) => {
-    return Promise.reject(err);
-  },
+  (err) => Promise.reject(err),
 );
 
 instance.interceptors.response.use(

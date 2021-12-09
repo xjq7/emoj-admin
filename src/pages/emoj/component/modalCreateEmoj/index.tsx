@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Form, Input, Select } from 'antd';
 import { Emoj, getEmojGroupList } from '@services/emoj';
 import _ from 'lodash';
@@ -8,11 +8,9 @@ interface Props {
   data?: Emoj;
 }
 
-function ModalCreateEmoj(props: Props) {
+const ModalCreateEmoj = function (props: Props) {
   const { modalCreateEmojRef, data } = props;
-  const { id } = data || {};
 
-  const isEdit = !!id;
   const [emojGroupsOptions, setEmojGroupsOptions] = useState<{ label?: string; value?: number }[]>([]);
 
   const [fetchEmojGroupLoading, setFetchEmojGroupLoading] = useState(false);
@@ -75,6 +73,10 @@ function ModalCreateEmoj(props: Props) {
       </Form.Item>
     </Form>
   );
-}
+};
+
+ModalCreateEmoj.defaultProps = {
+  data: {},
+};
 
 export default ModalCreateEmoj;

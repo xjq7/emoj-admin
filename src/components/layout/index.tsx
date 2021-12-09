@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { PieChartOutlined, FileOutlined } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -7,9 +7,7 @@ import styles from './index.module.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-interface Props extends React.Props<any> {}
-
-function Index(props: Props) {
+const Index = function () {
   const [collapsed, setCollapsed] = useState(false);
   const [breadCrumb, setBreadCrumb] = useState('用户管理');
   const [selectedKeys, setSelectedKeys] = useState(['1']);
@@ -35,6 +33,7 @@ function Index(props: Props) {
         setBreadCrumb('分组管理');
         setSelectedKeys(['3']);
         break;
+      default:
     }
   }, [location]);
 
@@ -77,6 +76,6 @@ function Index(props: Props) {
       </Layout>
     </Layout>
   );
-}
+};
 
 export default Index;

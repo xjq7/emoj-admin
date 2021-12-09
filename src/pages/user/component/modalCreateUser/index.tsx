@@ -1,13 +1,13 @@
+import React from 'react';
 import { Form, FormInstance, Input } from 'antd';
 import { UserInfo } from '../../index';
 
 interface Props extends React.Props<any> {
   modalCreateUserRef: React.RefObject<FormInstance<any>>;
-  isEdit: boolean;
   data: UserInfo;
 }
 
-function ModalCreateUser(props: Props) {
+const ModalCreateUser = function (props: Props) {
   const { modalCreateUserRef, data } = props;
   const { name, password, phone } = data;
   return (
@@ -23,6 +23,6 @@ function ModalCreateUser(props: Props) {
       </Form.Item>
     </Form>
   );
-}
+};
 
 export default ModalCreateUser;

@@ -8,16 +8,16 @@ export interface Response<T = AnyOptions> {
   data?: T;
 }
 
+export interface PageInfo {
+  page?: number;
+  pageSize?: number;
+  total?: number;
+}
+
 export interface ResponseList<T> {
   code?: number;
   message?: string;
   data?: {
     list?: T[];
   } & PageInfo;
-}
-
-export interface PageInfo {
-  page?: number;
-  pageSize?: number;
-  total?: number;
 }
