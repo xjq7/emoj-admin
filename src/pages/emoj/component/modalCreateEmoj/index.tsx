@@ -1,14 +1,18 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Form, Input, Select } from 'antd';
-import { getEmojGroupList } from '@services/emoj';
+import { Emoj, getEmojGroupList } from '@services/emoj';
 import _ from 'lodash';
 
 interface Props {
   modalCreateEmojRef: any;
+  data?: Emoj;
 }
 
 function ModalCreateEmoj(props: Props) {
-  const { modalCreateEmojRef } = props;
+  const { modalCreateEmojRef, data } = props;
+  const { id } = data || {};
+
+  const isEdit = !!id;
   const [emojGroupsOptions, setEmojGroupsOptions] = useState<{ label?: string; value?: number }[]>([]);
 
   const [fetchEmojGroupLoading, setFetchEmojGroupLoading] = useState(false);
@@ -28,10 +32,8 @@ function ModalCreateEmoj(props: Props) {
     return _.debounce(fetchEmojGroup, 1000);
   }, [getEmojGroupList, 1000]);
 
-  useEffect(() => {}, []);
-
   return (
-    <Form ref={modalCreateEmojRef} labelCol={{ span: 4 }}>
+    <Form ref={modalCreateEmojRef} initialValues={data} labelCol={{ span: 4 }}>
       <Form.Item label="关联分组" name="emoj_group">
         <Select
           allowClear
@@ -49,7 +51,26 @@ function ModalCreateEmoj(props: Props) {
       <Form.Item label="描述" name="desc">
         <Input placeholder="请输入描述" />
       </Form.Item>
-      <Form.Item label="链接" name="url" rules={[{ required: true, message: '请输入链接' }]}>
+      <Form.Item
+        label="链接"
+        name="url"
+        rules={[
+          {
+            required: true,
+            validator: (rule, value, callback) => {
+              if (!value) {
+                callback('请输入链接');
+                return;
+              }
+              if (!/^((http|https):\/\/)/.test(value)) {
+                callback('请输入正确的链接');
+                return;
+              }
+              callback();
+            },
+          },
+        ]}
+      >
         <Input placeholder="请输入链接" />
       </Form.Item>
     </Form>

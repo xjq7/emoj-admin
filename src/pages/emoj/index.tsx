@@ -34,14 +34,14 @@ function EmojPage() {
     fetchList(1, 10);
   };
 
-  const handleCreateEmoj = (record?: Emoj) => {
+  const handleUpdateEmoj = (record?: Emoj) => {
     const { id } = record || {};
-    const label = id ? '新增表情' : '编辑表情';
+    const label = id ? '编辑表情' : '新增表情';
     const form = React.createRef<FormInstance>();
     Modal.confirm({
       title: label,
       width: 600,
-      content: <ModalCreateEmoj modalCreateEmojRef={form} />,
+      content: <ModalCreateEmoj data={record} modalCreateEmojRef={form} />,
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
@@ -65,10 +65,12 @@ function EmojPage() {
     {
       title: '描述',
       dataIndex: 'desc',
+      render: (text: string) => text || '无',
     },
     {
       title: '分组',
       dataIndex: 'emoj_group_name',
+      render: (text: string) => text || '无',
     },
     {
       title: '预览',
@@ -79,6 +81,14 @@ function EmojPage() {
       render: (text: any, record: Emoj) => {
         return (
           <>
+            <Button
+              type="link"
+              onClick={() => {
+                handleUpdateEmoj(record);
+              }}
+            >
+              编辑
+            </Button>
             <Button type="link" danger>
               删除
             </Button>
@@ -103,7 +113,7 @@ function EmojPage() {
               style={{ marginLeft: '20px' }}
               type="primary"
               onClick={() => {
-                handleCreateEmoj();
+                handleUpdateEmoj();
               }}
             >
               新增
