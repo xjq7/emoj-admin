@@ -32,7 +32,7 @@ const ModalCreateEmoj = function (props: Props) {
 
   return (
     <Form ref={modalCreateEmojRef} initialValues={data} labelCol={{ span: 4 }}>
-      <Form.Item label="关联分组" name="emoj_group">
+      <Form.Item label="关联分组" name="groupId">
         <Select
           allowClear
           showSearch

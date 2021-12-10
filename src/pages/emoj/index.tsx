@@ -42,18 +42,19 @@ const EmojPage = function () {
       title: label,
       width: 600,
       content: <ModalCreateEmoj data={record} modalCreateEmojRef={form} />,
-      okText: '确认',
-      cancelText: '取消',
       onOk: async () => {
-        const { name, desc, url } = (await form.current?.validateFields()) || {};
+        const { name, desc, url, groupId } = (await form.current?.validateFields()) || {};
         await updateEmoj({
           name,
           desc,
           url,
+          group_id: groupId,
           id,
         });
         await refresh();
         message.success(`${label}成功`);
+        form.current?.resetFields(['name', 'desc', 'url']);
+        return Promise.reject();
       },
     });
   };
@@ -112,8 +113,6 @@ const EmojPage = function () {
               handleDeleteEmoj(record);
             }}
             onCancel={() => {}}
-            okText="确认"
-            cancelText="取消"
           >
             <Button type="link" danger>
               删除

@@ -6,6 +6,7 @@ export interface Emoj {
   name?: string;
   desc?: string;
   url?: string;
+  group_id?: number;
   created_at?: string;
 }
 
