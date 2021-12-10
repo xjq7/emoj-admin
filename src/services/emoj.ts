@@ -41,3 +41,7 @@ export function updateEmojGroup(body: EmojGroup): Promise<Response> {
 export function deleteEmojGroup(body: EmojGroup): Promise<Response> {
   return request.post('/emoj/group/delete', body);
 }
+
+export function deleteEmoj(body: { id: number }): Promise<Response> {
+  return request.post('/emoj/delete', body);
+}

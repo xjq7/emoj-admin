@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Image } from 'antd';
-import { getEmojList, Emoj, updateEmoj } from '@services/emoj';
+import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Image, Popconfirm } from 'antd';
+import { getEmojList, Emoj, updateEmoj, deleteEmoj } from '@services/emoj';
 import { PageInfo } from '@utils/types';
 import ModalCreateEmoj from './component/modalCreateEmoj';
 
@@ -58,6 +58,14 @@ const EmojPage = function () {
     });
   };
 
+  const handleDeleteEmoj = async (record?: Emoj) => {
+    const { id } = record || {};
+    if (!id) return;
+    await deleteEmoj({ id });
+    await refresh();
+    message.success('删除成功');
+  };
+
   const columns = [
     {
       title: 'ID',
@@ -78,6 +86,10 @@ const EmojPage = function () {
       render: (text: string) => text || '无',
     },
     {
+      title: '排序',
+      dataIndex: 'sort',
+    },
+    {
       title: '预览',
       dataIndex: 'url',
       render: (text: string) => <Image width={100} src={text} />,
@@ -94,9 +106,19 @@ const EmojPage = function () {
           >
             编辑
           </Button>
-          <Button type="link" danger>
-            删除
-          </Button>
+          <Popconfirm
+            title="确认删除?"
+            onConfirm={() => {
+              handleDeleteEmoj(record);
+            }}
+            onCancel={() => {}}
+            okText="确认"
+            cancelText="取消"
+          >
+            <Button type="link" danger>
+              删除
+            </Button>
+          </Popconfirm>
         </>
       ),
     },
