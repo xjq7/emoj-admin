@@ -5,6 +5,7 @@ const path = require('path');
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: 'https://image.xjq.icu/img',
   build: {
     outDir: path.resolve(__dirname, './build'),
   },
