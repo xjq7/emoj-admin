@@ -11,7 +11,10 @@ export interface Emoj {
   created_at?: string;
 }
 
-interface GetEmojBody extends PageInfo {}
+interface GetEmojBody extends PageInfo {
+  name?: string;
+  group_id?: number;
+}
 
 export function getEmojList(body: GetEmojBody): Promise<ResponseList<Emoj>> {
   return request.post('/emoj/list', body);

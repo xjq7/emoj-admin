@@ -78,7 +78,7 @@ const EmojGroupPage = function () {
       title: '操作',
       render: (text: any, record: Emoj) => (
         <Popconfirm
-          title="确认删除?"
+          title="确认删除?该分组关联的表情包都会删除!"
           onConfirm={() => {
             handleDeleteEmojGroup(record);
           }}

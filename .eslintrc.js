@@ -33,5 +33,6 @@ module.exports = {
       'error',
       { devDependencies: true, optionalDependencies: false, peerDependencies: false },
     ],
+    'react/jsx-props-no-spreading': 0,
   },
 };

@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Image, Popconfirm } from 'antd';
 import { getEmojList, Emoj, updateEmoj, deleteEmoj } from '@services/emoj';
 import { PageInfo } from '@utils/types';
+import SelectEmojGroup from '@components/SelectEmojGroup';
 import ModalCreateEmoj from './component/modalCreateEmoj';
 
 const EmojPage = function () {
   const [list, setList] = useState<Emoj[]>([]);
   const [loading, setLoading] = useState(false);
   const [pageInfo, setPageInfo] = useState<PageInfo>({ page: 1, pageSize: 10, total: 0 });
+  const [searchFrom] = Form.useForm();
 
   const fetchList = async (page?: number, pageSize?: number) => {
     try {
       setLoading(true);
-      const { data } = await getEmojList({ page, pageSize });
+      const { name, groupId } = await searchFrom.getFieldsValue();
+      const { data } = await getEmojList({ page, pageSize, group_id: groupId, name });
       const { list: emjoList = [], ...pageInfo } = data || {};
       setList(emjoList);
       setPageInfo({ ...pageInfo });
@@ -138,9 +141,12 @@ const EmojPage = function () {
   return (
     <>
       <Card>
-        <Form layout="inline">
+        <Form form={searchFrom} layout="inline">
           <Form.Item label="名称" name="name">
             <Input placeholder="请输入名称" />
+          </Form.Item>
+          <Form.Item label="关联分组" name="groupId">
+            <SelectEmojGroup />
           </Form.Item>
           <Form.Item>
             <Button type="primary" onClick={handleSearch}>
