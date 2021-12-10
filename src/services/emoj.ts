@@ -7,6 +7,7 @@ export interface Emoj {
   desc?: string;
   url?: string;
   group_id?: number;
+  group_name?: string;
   created_at?: string;
 }
 

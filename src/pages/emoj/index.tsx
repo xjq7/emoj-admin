@@ -75,15 +75,26 @@ const EmojPage = function () {
     {
       title: '名称',
       dataIndex: 'name',
+      width: 150,
+      ellipsis: true,
     },
     {
       title: '描述',
+      width: 100,
       dataIndex: 'desc',
       render: (text: string) => text || '无',
     },
     {
+      title: '标签',
+      width: 100,
+      dataIndex: 'tag',
+      render: (text: string) => text || '无',
+    },
+    {
       title: '分组',
-      dataIndex: 'emoj_group_name',
+      dataIndex: 'group_name',
+      width: 150,
+      ellipsis: true,
       render: (text: string) => text || '无',
     },
     {
@@ -92,6 +103,7 @@ const EmojPage = function () {
     },
     {
       title: '预览',
+      width: 120,
       dataIndex: 'url',
       render: (text: string) => <Image width={100} src={text} />,
     },
