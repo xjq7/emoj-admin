@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Form, Input, Button, Table, Card, Modal, FormInstance, message } from 'antd';
+import { Form, Input, Button, Table, Card, Modal, FormInstance, message, Popconfirm } from 'antd';
 import dayjs from 'dayjs';
 import { GetUserListBody, getUserList, updateUser, deleteUser } from '@services/user';
 import ModalCreateUser from './component/modalCreateUser';
@@ -77,13 +77,11 @@ const User = function () {
     Modal.confirm({
       title: '确定删除用户?',
       content: '删除后不可恢复',
-      okText: '确定',
       onOk: async () => {
         await deleteUser({ id });
         await refresh();
         message.success('删除用户成功');
       },
-      cancelText: '取消',
     });
   };
 
@@ -107,15 +105,17 @@ const User = function () {
           >
             编辑
           </Button>
-          <Button
-            type="link"
-            danger
-            onClick={() => {
+          <Popconfirm
+            title="确认删除?"
+            onConfirm={() => {
               handleDeleteUser(record.id);
             }}
+            onCancel={() => {}}
           >
-            删除
-          </Button>
+            <Button type="link" danger>
+              删除
+            </Button>
+          </Popconfirm>
         </>
       ),
     },

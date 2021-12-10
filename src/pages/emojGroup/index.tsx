@@ -45,8 +45,6 @@ const EmojGroupPage = function () {
       title: label,
       width: 500,
       content: <ModalCreateEmojGroup modalCreateEmojGroupRef={form} />,
-      okText: '确定',
-      cancelText: '取消',
       onOk: async () => {
         const values: EmojGroup = await form.current?.validateFields();
         if (id) values.id = id;
