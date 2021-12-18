@@ -12,7 +12,7 @@ const ModalCreateEmoj = function (props: Props) {
 
   return (
     <Form ref={modalCreateEmojRef} initialValues={data} labelCol={{ span: 4 }}>
-      <Form.Item label="关联分组" name="groupId">
+      <Form.Item label="关联分组" name="group_id">
         <SelectEmojGroup />
       </Form.Item>
       <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入名称' }]}>

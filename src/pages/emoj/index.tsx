@@ -5,17 +5,19 @@ import { PageInfo } from '@utils/types';
 import SelectEmojGroup from '@components/SelectEmojGroup';
 import ModalCreateEmoj from './component/modalCreateEmoj';
 
+const initPageInfo = { page: 1, pageSize: 15, total: 0 };
+
 const EmojPage = function () {
   const [list, setList] = useState<Emoj[]>([]);
   const [loading, setLoading] = useState(false);
-  const [pageInfo, setPageInfo] = useState<PageInfo>({ page: 1, pageSize: 10, total: 0 });
+  const [pageInfo, setPageInfo] = useState<PageInfo>(initPageInfo);
   const [searchFrom] = Form.useForm();
 
   const fetchList = async (page?: number, pageSize?: number) => {
     try {
       setLoading(true);
-      const { name, groupId } = await searchFrom.getFieldsValue();
-      const { data } = await getEmojList({ page, pageSize, group_id: groupId, name });
+      const { name, group_id } = await searchFrom.getFieldsValue();
+      const { data } = await getEmojList({ page, pageSize, group_id, name });
       const { list: emjoList = [], ...pageInfo } = data || {};
       setList(emjoList);
       setPageInfo({ ...pageInfo });
@@ -25,16 +27,20 @@ const EmojPage = function () {
     }
   };
 
+  const fetchFirstList = async () => {
+    await fetchList(initPageInfo.page, initPageInfo.pageSize);
+  };
+
   const refresh = async () => {
-    await fetchList(1, 10);
+    fetchFirstList();
   };
 
   useEffect(() => {
-    fetchList(1, 10);
+    fetchFirstList();
   }, []);
 
   const handleSearch = () => {
-    fetchList(1, 10);
+    fetchFirstList();
   };
 
   const handleUpdateEmoj = (record?: Emoj) => {
@@ -171,7 +177,7 @@ const EmojPage = function () {
           dataSource={list}
           columns={columns}
           pagination={{
-            showSizeChanger: false,
+            showSizeChanger: true,
             showQuickJumper: false,
             showTotal: () => `共${pageInfo.total}条`,
             pageSize: Number(pageInfo.pageSize),

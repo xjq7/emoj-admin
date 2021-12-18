@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react';
-import { Select } from 'antd';
+import { useState, useMemo, useEffect } from 'react';
+import { Select, SelectProps } from 'antd';
 import { getEmojGroupList } from '@services/emoj';
 import _ from 'lodash';
 
-type Props = any;
+interface Props extends SelectProps<any> {}
 
 const SelectEmojGroup = function (props: Props) {
   const [fetchEmojGroupLoading, setFetchEmojGroupLoading] = useState(false);
@@ -12,7 +12,7 @@ const SelectEmojGroup = function (props: Props) {
     const fetchEmojGroup = async (value: string) => {
       try {
         setFetchEmojGroupLoading(true);
-        const { data } = await getEmojGroupList({ page: 1, pageSize: 100, name: value });
+        const { data } = await getEmojGroupList({ page: 1, pageSize: 100000, name: value });
         const { list = [] } = data || {};
         setEmojGroupsOptions(list.map(({ name, id }) => ({ label: name, value: id })));
       } catch (error) {
@@ -22,6 +22,11 @@ const SelectEmojGroup = function (props: Props) {
     };
     return _.debounce(fetchEmojGroup, 1000);
   }, [getEmojGroupList, 1000]);
+
+  useEffect(() => {
+    handleEmojGroupSearch('');
+  }, []);
+
   return (
     <Select
       style={{ width: 200 }}
