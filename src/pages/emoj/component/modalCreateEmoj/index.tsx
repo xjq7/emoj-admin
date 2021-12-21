@@ -2,6 +2,8 @@ import { Form, Input } from 'antd';
 import { Emoj } from '@services/emoj';
 import SelectEmojGroup from '@components/SelectEmojGroup';
 
+console.log(1);
+
 interface Props {
   modalCreateEmojRef: any;
   data?: Emoj;
