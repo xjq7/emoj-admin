@@ -22,7 +22,7 @@
       "@components/*": ["src/components/*"],
       "@services/*": ["src/services/*"]
     },
-    "types": ["node", "vite/client"]
+    "types": ["vite/client"]
   },
   "include": ["./src"]
 }
