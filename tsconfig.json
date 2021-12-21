@@ -14,15 +14,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-		"baseUrl": "./",
-		"paths": {
-			"@*": ["src/*"],
+    "baseUrl": "./",
+    "paths": {
+      "@*": ["src/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
       "@components/*": ["src/components/*"],
       "@services/*": ["src/services/*"]
-		},
-    "types": ["node"],
+    },
+    "types": ["node", "vite/client"]
   },
-  "include": ["./src"],
+  "include": ["./src"]
 }
