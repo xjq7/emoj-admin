@@ -33,7 +33,13 @@ const User = function () {
     try {
       const { data } = await getUserList(params);
       const { list, total, page, pageSize } = data || {};
-      setData(list.map((item: any) => ({ ...item, create_at: dayjs(item.create_at).format('YYYY-MM-DD HH:mm:ss') })));
+      setData(
+        list.map((item: any) => ({
+          ...item,
+          update_at: dayjs(item.update_at).format('YYYY-MM-DD HH:mm:ss'),
+          create_at: dayjs(item.create_at).format('YYYY-MM-DD HH:mm:ss'),
+        })),
+      );
       setPageInfo({ page, pageSize, total });
     } catch (error) {
     } finally {
