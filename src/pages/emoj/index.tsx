@@ -16,7 +16,7 @@ const EmojPage = function () {
   const fetchList = async (page?: number, pageSize?: number) => {
     try {
       setLoading(true);
-      const { name, group_id } = await searchFrom.getFieldsValue();
+      const { name, groupId: group_id } = await searchFrom.getFieldsValue();
       const { data } = await getEmojList({ page, pageSize, group_id, name });
       const { list: emjoList = [], ...pageInfo } = data || {};
       setList(emjoList);
