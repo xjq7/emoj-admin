@@ -38,6 +38,7 @@ instance.interceptors.response.use(
     message.error(err.message);
     if (status === 401) {
       message.error('登录已过期，请重新登录');
+      localStorage.clear();
       setTimeout(() => {
         location.replace('/login');
       }, 1000);
