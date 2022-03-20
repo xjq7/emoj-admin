@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -25,7 +25,6 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'object-curly-newline': 0,
     'func-names': ['error', 'as-needed'],
-    'max-len': 0,
     'react/react-in-jsx-scope': 0,
     'import/prefer-default-export': 0,
     'no-restricted-globals': 0,
@@ -35,5 +34,7 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 0,
     camelcase: 0,
+    'react/require-default-props': 0,
+    'react/function-component-definition': 0,
   },
 };

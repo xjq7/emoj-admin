@@ -20,7 +20,9 @@
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
       "@components/*": ["src/components/*"],
-      "@services/*": ["src/services/*"]
+      "@services/*": ["src/services/*"] ,
+      "@constant/*": ["src/constant/*"]
+     
     },
     "types": ["vite/client"]
   },

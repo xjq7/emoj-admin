@@ -47,4 +47,11 @@ instance.interceptors.response.use(
   },
 );
 
-export default instance;
+export const get = function (url: string, data?: any): any {
+  return instance.get(url, { params: data });
+};
+export const post = function (url: string, data?: any, config?: any): any {
+  return instance.post(url, data, { ...config });
+};
+
+export default { get, post };

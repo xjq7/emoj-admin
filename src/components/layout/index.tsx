@@ -33,6 +33,14 @@ const Index = function () {
         setBreadCrumb('分组管理');
         setSelectedKeys(['3']);
         break;
+      case '/book':
+        setBreadCrumb('书籍管理');
+        setSelectedKeys(['4']);
+        break;
+      case '/createBook':
+          setBreadCrumb('书籍上传');
+          setSelectedKeys(['5']);
+          break;
       default:
     }
   }, [location]);
@@ -54,13 +62,17 @@ const Index = function () {
           <Menu.Item key="1" icon={<PieChartOutlined />} onClick={() => navigate('/user')}>
             用户管理
           </Menu.Item>
-
           <Menu.Item key="2" icon={<PieChartOutlined />} onClick={() => navigate('/emoj')}>
             表情包管理
           </Menu.Item>
-
           <Menu.Item key="3" icon={<FileOutlined />} onClick={() => navigate('/emojGroup')}>
             分组管理
+          </Menu.Item>
+          <Menu.Item key="4" icon={<FileOutlined />} onClick={() => navigate('/book')}>
+            书籍管理
+          </Menu.Item>
+          <Menu.Item key="5" icon={<FileOutlined />} onClick={() => navigate('/createBook')}>
+            书籍上传
           </Menu.Item>
         </Menu>
       </Sider>
