@@ -5,5 +5,5 @@ interface LoginBody {
   password: string;
 }
 export function login(body: LoginBody) {
-  return request.post('/auth/login', body);
+  return request.post('/user/login', body);
 }

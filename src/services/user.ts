@@ -6,7 +6,7 @@ interface DeleteUserBody {
 }
 
 export function deleteUser(body: DeleteUserBody) {
-  return request.post('/user/delete', body);
+  return request.delete('/user', body);
 }
 
 interface UpdateUserBody {
@@ -17,7 +17,7 @@ interface UpdateUserBody {
 }
 
 export function updateUser(body: UpdateUserBody) {
-  return request.post('/user/update', body);
+  return request.post('/user', body);
 }
 
 export interface GetUserListBody extends PageInfo {
@@ -25,5 +25,5 @@ export interface GetUserListBody extends PageInfo {
 }
 
 export function getUserList(body: GetUserListBody) {
-  return request.post('/user/list', body);
+  return request.get('/user/list', body);
 }

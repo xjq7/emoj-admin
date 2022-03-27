@@ -63,7 +63,7 @@ const EmojPage = function () {
         await refresh();
         message.success(`${label}成功`);
         form.current?.resetFields(['name', 'desc', 'url']);
-        return Promise.reject();
+        return !id ? Promise.reject() : Promise.resolve();
       },
     });
   };
@@ -72,7 +72,7 @@ const EmojPage = function () {
     const { id } = record || {};
     if (!id) return;
     await deleteEmoj({ id });
-    await refresh();
+    await fetchList(pageInfo.page, pageInfo.pageSize);
     message.success('删除成功');
   };
 

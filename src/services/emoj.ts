@@ -17,11 +17,11 @@ interface GetEmojBody extends PageInfo {
 }
 
 export function getEmojList(body: GetEmojBody): Promise<ResponseList<Emoj>> {
-  return request.post('/emoj/list', body);
+  return request.get('/emoj/list', body);
 }
 
 export function updateEmoj(body: Emoj): Promise<Response> {
-  return request.post('/emoj/update', body);
+  return request.post('/emoj', body);
 }
 
 export interface EmojGroup {
@@ -36,17 +36,17 @@ export interface GetEmojListBody extends PageInfo {
 }
 
 export function getEmojGroupList(body: GetEmojListBody): Promise<ResponseList<EmojGroup>> {
-  return request.post('/emoj/group/list', body);
+  return request.get('/emoj-group/list', body);
 }
 
 export function updateEmojGroup(body: EmojGroup): Promise<Response> {
-  return request.post('/emoj/group/update', body);
+  return request.post('/emoj-group', body);
 }
 
 export function deleteEmojGroup(body: EmojGroup): Promise<Response> {
-  return request.post('/emoj/group/delete', body);
+  return request.delete('/emoj-group', body);
 }
 
 export function deleteEmoj(body: { id: number }): Promise<Response> {
-  return request.post('/emoj/delete', body);
+  return request.delete('/emoj', body);
 }
