@@ -36,5 +36,7 @@ module.exports = {
     camelcase: 0,
     'react/require-default-props': 0,
     'react/function-component-definition': 0,
+    'no-underscore-dangle': 0,
+    'no-plusplus': 0,
   },
 };

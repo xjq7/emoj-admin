@@ -36,8 +36,8 @@ const User = function () {
       setData(
         list.map((item: any) => ({
           ...item,
-          update_at: dayjs(item.update_at).format('YYYY-MM-DD HH:mm:ss'),
-          create_at: dayjs(item.create_at).format('YYYY-MM-DD HH:mm:ss'),
+          updatedAt: dayjs(item.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+          createdAt: dayjs(item.createdAt).format('YYYY-MM-DD HH:mm:ss'),
         })),
       );
       setPageInfo({ page, pageSize, total });
@@ -95,8 +95,8 @@ const User = function () {
     { key: 'id', dataIndex: 'id', title: 'id' },
     { key: 'name', dataIndex: 'name', title: '昵称' },
     { key: 'phone', dataIndex: 'phone', title: '手机号' },
-    { key: 'create_at', dataIndex: 'create_at', title: '注册时间' },
-    { key: 'update_at', dataIndex: 'update_at', title: '最近上线时间' },
+    { key: 'createdAt', dataIndex: 'createdAt', title: '注册时间' },
+    { key: 'updatedAt', dataIndex: 'updatedAt', title: '最近上线时间' },
     {
       key: 'operation',
       dataIndex: 'operation',

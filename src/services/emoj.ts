@@ -21,6 +21,10 @@ export function getEmojList(body: GetEmojBody): Promise<ResponseList<Emoj>> {
 }
 
 export function updateEmoj(body: Emoj): Promise<Response> {
+  return request.put('/emoj', body);
+}
+
+export function createEmoj(body: Emoj): Promise<Response> {
   return request.post('/emoj', body);
 }
 

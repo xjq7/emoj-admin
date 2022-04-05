@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Table, Card, Input, Modal, FormInstance, message, Image, Popconfirm } from 'antd';
-import { getEmojList, Emoj, updateEmoj, deleteEmoj } from '@services/emoj';
+import { getEmojList, Emoj, updateEmoj, deleteEmoj, createEmoj } from '@services/emoj';
 import { PageInfo } from '@utils/types';
 import SelectEmojGroup from '@components/SelectEmojGroup';
 import ModalCreateEmoj from './component/modalCreateEmoj';
@@ -45,14 +45,18 @@ const EmojPage = function () {
 
   const handleUpdateEmoj = (record?: Emoj) => {
     const { id } = record || {};
-    const label = id ? '编辑表情' : '新增表情';
     const form = React.createRef<FormInstance>();
     Modal.confirm({
-      title: label,
+      title: '编辑表情',
       width: 600,
       content: <ModalCreateEmoj data={record} modalCreateEmojRef={form} />,
       onOk: async () => {
-        const { name, desc, url, groupId } = (await form.current?.validateFields()) || {};
+        const { name, desc, url: urls, groupId } = (await form.current?.validateFields()) || {};
+        const url = urls[0]?.url;
+        if (!url) {
+          message.error('请上传图片!');
+          return Promise.reject();
+        }
         await updateEmoj({
           name,
           desc,
@@ -61,9 +65,36 @@ const EmojPage = function () {
           id,
         });
         await refresh();
-        message.success(`${label}成功`);
+        message.success('操作成功');
         form.current?.resetFields(['name', 'desc', 'url']);
-        return !id ? Promise.reject() : Promise.resolve();
+        return Promise.reject();
+      },
+    });
+  };
+
+  const handleCreateEmoj = () => {
+    const form = React.createRef<FormInstance>();
+    Modal.confirm({
+      title: '新增表情',
+      width: 600,
+      content: <ModalCreateEmoj modalCreateEmojRef={form} />,
+      onOk: async () => {
+        const { name, desc, url: urls, groupId } = (await form.current?.validateFields()) || {};
+        const url = urls[0]?.url;
+        if (!url) {
+          message.error('请上传图片!');
+          return Promise.reject();
+        }
+        await createEmoj({
+          name,
+          desc,
+          url,
+          group_id: groupId,
+        });
+        await refresh();
+        message.success('操作成功');
+        form.current?.resetFields(['name', 'desc', 'url']);
+        return Promise.reject();
       },
     });
   };
@@ -158,13 +189,7 @@ const EmojPage = function () {
             <Button type="primary" onClick={handleSearch}>
               搜索
             </Button>
-            <Button
-              style={{ marginLeft: '20px' }}
-              type="primary"
-              onClick={() => {
-                handleUpdateEmoj();
-              }}
-            >
+            <Button style={{ marginLeft: '20px' }} type="primary" onClick={handleCreateEmoj}>
               新增
             </Button>
           </Form.Item>

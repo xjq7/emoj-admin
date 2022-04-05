@@ -17,8 +17,8 @@ const Component = function (props: Props) {
     formData.append('file', options.file);
     formData.append('name', options.file.name);
     onChange([...value, { uid: options.file.uid, name: options.file.name, status: 'uploading' }]);
-    const {data} = await upload2Bucket(formData);
-    const { path, id } = data
+    const { data } = await upload2Bucket(formData);
+    const { path, id } = data;
     value.filter((item: any) => item.uid !== options.file.uid);
     onChange([
       ...value,
