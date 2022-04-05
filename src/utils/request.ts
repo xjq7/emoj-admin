@@ -56,7 +56,7 @@ export const del = function (url: string, data?: any): any {
 };
 
 export const put = function (url: string, data?: any): any {
-  return instance.put(url, { params: data });
+  return instance.put(url, data);
 };
 
 export const post = function (url: string, data?: any, config?: any): any {

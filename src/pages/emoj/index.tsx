@@ -51,7 +51,7 @@ const EmojPage = function () {
       width: 600,
       content: <ModalCreateEmoj data={record} modalCreateEmojRef={form} />,
       onOk: async () => {
-        const { name, desc, url: urls, groupId } = (await form.current?.validateFields()) || {};
+        const { name, desc, url: urls, group_id } = (await form.current?.validateFields()) || {};
         const url = urls[0]?.url;
         if (!url) {
           message.error('请上传图片!');
@@ -61,13 +61,13 @@ const EmojPage = function () {
           name,
           desc,
           url,
-          group_id: groupId,
+          group_id,
           id,
         });
         await refresh();
         message.success('操作成功');
         form.current?.resetFields(['name', 'desc', 'url']);
-        return Promise.reject();
+        return Promise.resolve();
       },
     });
   };
@@ -79,7 +79,7 @@ const EmojPage = function () {
       width: 600,
       content: <ModalCreateEmoj modalCreateEmojRef={form} />,
       onOk: async () => {
-        const { name, desc, url: urls, groupId } = (await form.current?.validateFields()) || {};
+        const { name, desc, url: urls, group_id } = (await form.current?.validateFields()) || {};
         const url = urls[0]?.url;
         if (!url) {
           message.error('请上传图片!');
@@ -89,7 +89,7 @@ const EmojPage = function () {
           name,
           desc,
           url,
-          group_id: groupId,
+          group_id,
         });
         await refresh();
         message.success('操作成功');
