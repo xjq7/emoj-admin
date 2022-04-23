@@ -16,6 +16,8 @@ const Component = function (props: Props) {
     const formData = new FormData();
     formData.append('file', options.file);
     formData.append('name', options.file.name);
+    formData.append('createdAt', new Date().toISOString());
+
     onChange([...value, { uid: options.file.uid, name: options.file.name, status: 'uploading' }]);
     const { data } = await upload2Bucket(formData);
     const { path, id } = data;
