@@ -16,7 +16,15 @@ export default function Component() {
       message.error('请上传书籍');
       return;
     }
-    const data = { files, name, desc, category1, category2, created_at: new Date() };
+
+    const data = {
+      files: files.map(({ id }) => id),
+      name,
+      desc,
+      category1,
+      category2,
+      createdAt: new Date().toISOString(),
+    };
     setLoading(true);
     try {
       await createBook(data);

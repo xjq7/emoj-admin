@@ -16,6 +16,7 @@ export interface Book {
   category2?: number;
   author?: string;
   files?: any[];
+  createdAt?: string;
 }
 
 export function createBook(data: Book) {

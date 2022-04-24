@@ -22,8 +22,18 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const { status, data } = response;
-    if (data.code !== 0) {
-      message.error(data.message);
+    const { code, message: msg } = data;
+    if (code === 2) {
+      message.error(msg);
+      localStorage.clear();
+      setTimeout(() => {
+        location.replace('/login');
+      }, 1000);
+      return Promise.reject(data);
+    }
+
+    if (code !== 0) {
+      message.error(msg);
       return Promise.reject(data);
     }
 

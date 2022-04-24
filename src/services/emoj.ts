@@ -8,7 +8,7 @@ export interface Emoj {
   url?: string;
   group_id?: number;
   group_name?: string;
-  created_at?: string;
+  createdAt?: string;
 }
 
 interface GetEmojBody extends PageInfo {
@@ -32,7 +32,7 @@ export interface EmojGroup {
   id?: number;
   name?: string;
   desc?: string;
-  created_at?: string;
+  createdAt?: string;
 }
 
 export interface GetEmojListBody extends PageInfo {
