@@ -79,16 +79,10 @@ const User = function () {
     fetchList();
   };
 
-  const handleDeleteUser = (id: number) => {
-    Modal.confirm({
-      title: '确定删除用户?',
-      content: '删除后不可恢复',
-      onOk: async () => {
-        await deleteUser({ id });
-        await refresh();
-        message.success('删除用户成功');
-      },
-    });
+  const handleDeleteUser = async (id: number) => {
+    await deleteUser({ id });
+    await refresh();
+    message.success('删除用户成功');
   };
 
   const columns = [
