@@ -45,11 +45,8 @@ export default function Component() {
         <Form.Item label="描述" name="desc">
           <Input placeholder="描述" />
         </Form.Item>
-        <Form.Item label="一级类目" name="category1" rules={[{ required: true, message: '请选择一级类目' }]}>
-          <SelectCategory level={1} placeholder="请选择一级类目" />
-        </Form.Item>
-        <Form.Item label="二级类目" name="category2">
-          <SelectCategory level={2} placeholder="请选择一级类目" />
+        <Form.Item label="分类" name="category" rules={[{ required: true, message: '请选择分类' }]}>
+          <SelectCategory />
         </Form.Item>
         <Form.Item label="文件" name="files">
           <Upload />

@@ -38,9 +38,13 @@ const Index = function () {
         setSelectedKeys(['4']);
         break;
       case '/createBook':
-          setBreadCrumb('书籍上传');
-          setSelectedKeys(['5']);
-          break;
+        setBreadCrumb('书籍上传');
+        setSelectedKeys(['5']);
+        break;
+      case '/book/category':
+        setBreadCrumb('书籍分类');
+        setSelectedKeys(['6']);
+        break;
       default:
     }
   }, [location]);
@@ -73,6 +77,9 @@ const Index = function () {
           </Menu.Item>
           <Menu.Item key="5" icon={<FileOutlined />} onClick={() => navigate('/createBook')}>
             书籍上传
+          </Menu.Item>
+          <Menu.Item key="6" icon={<FileOutlined />} onClick={() => navigate('/book/category')}>
+            书籍分类
           </Menu.Item>
         </Menu>
       </Sider>

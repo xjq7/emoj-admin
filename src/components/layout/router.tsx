@@ -5,6 +5,7 @@ import Emoj from '@pages/emoj';
 import EmojGroup from '@pages/emojGroup';
 import Book from '@pages/book';
 import CreateBook from '@pages/createBook';
+import BookCategory from '@pages/bookCategory';
 
 const Router = function () {
   return (
@@ -15,6 +16,7 @@ const Router = function () {
       <Route path="emojGroup" element={<EmojGroup />} />
       <Route path="book" element={<Book />} />
       <Route path="createBook" element={<CreateBook />} />
+      <Route path="book/category" element={<BookCategory />} />
     </Routes>
   );
 };

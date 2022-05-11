@@ -18,8 +18,8 @@ const Component = function () {
     try {
       setLoading(true);
       const { name, category1, category2 } = await form.getFieldsValue();
-      const {data} = await getBookList({ page, pageSize, category1, category2, name });
-      const { list: bookList = [], ...pageInfo } = data
+      const { data } = await getBookList({ page, pageSize, category1, category2, name });
+      const { list: bookList = [], ...pageInfo } = data;
       setList(bookList);
       setPageInfo({ ...pageInfo });
     } catch (error) {
@@ -108,11 +108,8 @@ const Component = function () {
           <Form.Item label="书名" name="name">
             <Input placeholder="请输入书名" allowClear />
           </Form.Item>
-          <Form.Item label="一级类目" name="category1">
-            <SelectCategory style={{ width: 120 }} allowClear level={1} placeholder="请选择一级类目" />
-          </Form.Item>
-          <Form.Item label="二级类目" name="category2">
-            <SelectCategory style={{ width: 120 }} level={2} allowClear placeholder="请选择二级类目" />
+          <Form.Item label="分类" name="category">
+            <SelectCategory />
           </Form.Item>
           <Form.Item style={{ marginLeft: 20 }}>
             <Button type="primary" onClick={handleSearch} loading={loading}>
