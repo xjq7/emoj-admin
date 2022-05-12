@@ -28,3 +28,7 @@ interface BookListParams extends PageInfo, Book {}
 export function getBookList(params: BookListParams) {
   return request.get('/book/list', params);
 }
+
+export function createCategory(data: any) {
+  return request.post('/book/category/create', data);
+}
