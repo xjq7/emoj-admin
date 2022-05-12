@@ -2,7 +2,7 @@ import request from '@utils/request';
 import { PageInfo } from '@utils/types';
 
 export function upload2Bucket(params: any) {
-  return request.post('/bucket', params, { timeout: 3 * 60 * 1000 });
+  return request.post('/bucket', params, { timeout: 10 * 60 * 1000 });
 }
 
 export function getCategoryList() {
