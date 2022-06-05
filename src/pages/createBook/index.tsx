@@ -11,7 +11,7 @@ export default function Component() {
   const [form] = Form.useForm();
 
   const onFinish = async (formValues: Book) => {
-    const { name, desc, category1, category2, files = [] } = formValues;
+    const { name, desc, category_id, files = [] } = formValues;
     if (!files.length) {
       message.error('请上传书籍');
       return;
@@ -21,8 +21,7 @@ export default function Component() {
       files: files.map(({ id }) => id),
       name,
       desc,
-      category1,
-      category2,
+      category_id,
       createdAt: new Date().toISOString(),
     };
     setLoading(true);
@@ -45,7 +44,7 @@ export default function Component() {
         <Form.Item label="描述" name="desc">
           <Input placeholder="描述" />
         </Form.Item>
-        <Form.Item label="分类" name="category" rules={[{ required: true, message: '请选择分类' }]}>
+        <Form.Item label="分类" name="category_id" rules={[{ required: true, message: '请选择分类' }]}>
           <SelectCategory />
         </Form.Item>
         <Form.Item label="文件" name="files">

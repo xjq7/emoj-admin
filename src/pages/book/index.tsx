@@ -17,8 +17,8 @@ const Component = function () {
   const fetchList = async (page?: number, pageSize?: number) => {
     try {
       setLoading(true);
-      const { name, category1, category2 } = await form.getFieldsValue();
-      const { data } = await getBookList({ page, pageSize, category1, category2, name });
+      const { name, category_id } = await form.getFieldsValue();
+      const { data } = await getBookList({ page, pageSize, category_id, name });
       const { list: bookList = [], ...pageInfo } = data;
       setList(bookList);
       setPageInfo({ ...pageInfo });
@@ -51,18 +51,11 @@ const Component = function () {
       dataIndex: 'name',
     },
     {
-      title: '一级类目',
+      title: '分类',
       width: 120,
       align: 'center' as AlignType,
-      key: 'category1_name',
-      dataIndex: 'category1_name',
-    },
-    {
-      title: '二级类目',
-      width: 120,
-      align: 'center' as AlignType,
-      key: 'category2_name',
-      dataIndex: 'category2_name',
+      key: 'category_name',
+      dataIndex: 'category_name',
     },
     {
       title: '文件列表',
@@ -108,7 +101,7 @@ const Component = function () {
           <Form.Item label="书名" name="name">
             <Input placeholder="请输入书名" allowClear />
           </Form.Item>
-          <Form.Item label="分类" name="category">
+          <Form.Item label="分类" name="category_id">
             <SelectCategory />
           </Form.Item>
           <Form.Item style={{ marginLeft: 20 }}>

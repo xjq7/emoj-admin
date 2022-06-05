@@ -12,8 +12,7 @@ export function getCategoryList() {
 export interface Book {
   name?: string;
   desc?: string;
-  category1?: number;
-  category2?: number;
+  category_id?: number;
   author?: string;
   files?: any[];
   createdAt?: string;
