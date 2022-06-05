@@ -90,7 +90,7 @@ const User = function () {
     { key: 'name', dataIndex: 'name', title: '昵称' },
     { key: 'phone', dataIndex: 'phone', title: '手机号' },
     { key: 'createdAt', dataIndex: 'createdAt', title: '注册时间' },
-    { key: 'updatedAt', dataIndex: 'updatedAt', title: '最近上线时间' },
+    { key: 'latestAt', dataIndex: 'latestAt', title: '最近上线时间' },
     {
       key: 'operation',
       dataIndex: 'operation',
