@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development vite",
-    "start:production": "cross-env NODE_ENV=production vite",
-    "build": "cross-env NODE_ENV=production tsc && vite build",
+    "start:dev": "vite --mode development",
+    "start:staging": "vite --mode staging",
+    "build": "tsc && vite build --mode production",
     "serve": "vite preview"
   },
   "dependencies": {

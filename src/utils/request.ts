@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import { message } from 'antd';
 
-// @ts-ignore
 const { VITE_API: API } = import.meta.env;
 
 const instance = Axios.create({
